@@ -1,0 +1,30 @@
+{
+  "entities": [
+    {
+      "entity_id": "entity-1",
+      "label": "业务主体一",
+      "group_id": "group-1"
+    }
+  ],
+  "aliases": [
+    {
+      "source": "system",
+      "external_id": "external-1",
+      "entity_id": "entity-1"
+    }
+  ],
+  "events": [
+    {
+      "source": "system",
+      "event_id": "sample-1",
+      "revision": 1,
+      "kind": "ticket",
+      "entity": "external-1",
+      "occurred_at": "2026-11-01T10:00:00+08:00",
+      "observed_at": "2026-11-01T11:00:00+08:00",
+      "payload": {
+        "amount": 3
+      }
+    }
+  ]
+}

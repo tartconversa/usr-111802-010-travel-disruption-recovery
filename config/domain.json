@@ -1,0 +1,8 @@
+{
+  "name": "交通衔接运营",
+  "event_kinds": [
+    "ticket",
+    "schedule",
+    "rebook"
+  ]
+}
