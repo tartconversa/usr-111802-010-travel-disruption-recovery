@@ -9,3 +9,5 @@
 本地演练：python -m analytics --database demo.sqlite3 --fixture fixtures/sample.json
 
 analytics/store.py 保存来源事件和修订；identity.py 管理外部身份映射；metrics.py 汇总已映射主体的事件计数与通用金额；decisions.py 保存已发布报告；service.py 协调这些现有接口。当前摘要只表示原始观察，不提供行业专属分析结论。
+
+本服务另有 JourneyDirectory 的现行业务目录，见 analytics/domain.py；它与原始事件摘要尚未形成完整的分析口径。

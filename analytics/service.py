@@ -6,6 +6,7 @@ from .store import EventStore
 from .identity import EntityDirectory
 from .metrics import Metrics
 from .decisions import DecisionBook
+from .domain import JourneyDirectory
 
 class AnalyticsService:
     def __init__(self, database, config_path=None):
@@ -19,6 +20,7 @@ class AnalyticsService:
         self.entities = EntityDirectory(self.connection)
         self.metrics = Metrics(self.store, self.entities)
         self.decisions = DecisionBook(self.connection)
+        self.domain = JourneyDirectory(self.connection)
         self.connection.commit()
 
     def close(self):
