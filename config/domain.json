@@ -4,5 +4,11 @@
     "ticket",
     "schedule",
     "rebook"
-  ]
+  ],
+  "analysis": {
+    "ticket_kind": "ticket",
+    "schedule_kind": "schedule",
+    "rebook_kind": "rebook",
+    "handling_list_kind": "handling-list"
+  }
 }

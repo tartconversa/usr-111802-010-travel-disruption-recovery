@@ -70,3 +70,12 @@ class EventStore:
                 latest[key] = row
         return [dict(row) | {"payload": json.loads(row["payload"])}
                 for row in latest.values() if not row["deleted"]]
+
+    def history(self, as_of=None):
+        """按观察顺序返回截至某时刻的全部有效修订，用于基线对比。"""
+        where = "WHERE deleted=0" if as_of is None else "WHERE deleted=0 AND observed_at<=?"
+        parameters = () if as_of is None else (timestamp(as_of),)
+        rows = self.connection.execute(
+            f"SELECT source,event_id,revision,kind,entity,occurred_at,observed_at,payload,deleted FROM events {where} "
+            "ORDER BY observed_at,source,event_id,revision", parameters).fetchall()
+        return [dict(row) | {"payload": json.loads(row["payload"])} for row in rows]

@@ -15,3 +15,10 @@ class JourneyDirectory:
 
     def legs(self, journey):
         return [tuple(row) for row in self.connection.execute("SELECT leg_no,train,station FROM legs WHERE journey=? ORDER BY leg_no", (journey,))]
+
+    def journeys(self):
+        return [row[0] for row in self.connection.execute("SELECT DISTINCT journey FROM legs ORDER BY journey")]
+
+    def interchange_for(self, station):
+        row = self.connection.execute("SELECT minutes FROM interchange WHERE station=?", (station,)).fetchone()
+        return row[0] if row else None

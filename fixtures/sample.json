@@ -2,7 +2,12 @@
   "entities": [
     {
       "entity_id": "entity-1",
-      "label": "业务主体一",
+      "label": "旅客一",
+      "group_id": "group-1"
+    },
+    {
+      "entity_id": "entity-2",
+      "label": "旅客二",
       "group_id": "group-1"
     }
   ],
@@ -11,20 +16,114 @@
       "source": "system",
       "external_id": "external-1",
       "entity_id": "entity-1"
+    },
+    {
+      "source": "system",
+      "external_id": "external-2",
+      "entity_id": "entity-2"
     }
+  ],
+  "journeys": [
+    {
+      "journey": "J-1001",
+      "legs": [
+        {"leg_no": 1, "train": "G101", "station": "上海虹桥"},
+        {"leg_no": 2, "train": "G205", "station": "南京南"}
+      ]
+    }
+  ],
+  "interchange": [
+    {"station": "南京南", "minutes": 15}
   ],
   "events": [
     {
       "source": "system",
-      "event_id": "sample-1",
+      "event_id": "ticket-1",
       "revision": 1,
       "kind": "ticket",
       "entity": "external-1",
-      "occurred_at": "2026-11-01T10:00:00+08:00",
-      "observed_at": "2026-11-01T11:00:00+08:00",
-      "payload": {
-        "amount": 3
-      }
+      "occurred_at": "2026-11-01T08:00:00+08:00",
+      "observed_at": "2026-11-01T08:00:00+08:00",
+      "payload": {"journey": "J-1001", "amount": 120}
+    },
+    {
+      "source": "system",
+      "event_id": "ticket-2",
+      "revision": 1,
+      "kind": "ticket",
+      "entity": "external-1",
+      "occurred_at": "2026-11-01T08:01:00+08:00",
+      "observed_at": "2026-11-01T08:01:00+08:00",
+      "payload": {"journey": "J-1001", "amount": 60}
+    },
+    {
+      "source": "system",
+      "event_id": "ticket-3",
+      "revision": 1,
+      "kind": "ticket",
+      "entity": "external-2",
+      "occurred_at": "2026-11-01T08:02:00+08:00",
+      "observed_at": "2026-11-01T08:02:00+08:00",
+      "payload": {"journey": "J-1001", "amount": 180}
+    },
+    {
+      "source": "ops",
+      "event_id": "G101@南京南",
+      "revision": 1,
+      "kind": "schedule",
+      "entity": "G101",
+      "occurred_at": "2026-11-01T06:00:00+08:00",
+      "observed_at": "2026-11-01T06:00:00+08:00",
+      "payload": {"train": "G101", "station": "南京南",
+                  "arrival": "2026-11-01T10:00:00+08:00",
+                  "departure": "2026-11-01T10:02:00+08:00"}
+    },
+    {
+      "source": "ops",
+      "event_id": "G101@南京南",
+      "revision": 2,
+      "kind": "schedule",
+      "entity": "G101",
+      "occurred_at": "2026-11-01T09:30:00+08:00",
+      "observed_at": "2026-11-01T09:30:00+08:00",
+      "payload": {"train": "G101", "station": "南京南",
+                  "arrival": "2026-11-01T10:20:00+08:00",
+                  "departure": "2026-11-01T10:22:00+08:00"}
+    },
+    {
+      "source": "ops",
+      "event_id": "G205@南京南",
+      "revision": 1,
+      "kind": "schedule",
+      "entity": "G205",
+      "occurred_at": "2026-11-01T06:00:00+08:00",
+      "observed_at": "2026-11-01T06:00:00+08:00",
+      "payload": {"train": "G205", "station": "南京南",
+                  "arrival": "2026-11-01T10:25:00+08:00",
+                  "departure": "2026-11-01T10:30:00+08:00"}
+    },
+    {
+      "source": "ops",
+      "event_id": "G206@南京南",
+      "revision": 1,
+      "kind": "schedule",
+      "entity": "G206",
+      "occurred_at": "2026-11-01T06:00:00+08:00",
+      "observed_at": "2026-11-01T06:00:00+08:00",
+      "payload": {"train": "G206", "station": "南京南",
+                  "arrival": "2026-11-01T10:55:00+08:00",
+                  "departure": "2026-11-01T11:00:00+08:00",
+                  "seats": 5}
+    },
+    {
+      "source": "system",
+      "event_id": "rebook-1",
+      "revision": 1,
+      "kind": "rebook",
+      "entity": "external-2",
+      "occurred_at": "2026-11-01T09:45:00+08:00",
+      "observed_at": "2026-11-01T09:45:00+08:00",
+      "payload": {"journey": "J-1001", "train": "G206"}
     }
   ]
 }
